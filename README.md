@@ -33,18 +33,10 @@ Additional source documentation is located at:
 
 The raw data should not be modified directly. All cleaning is performed on a copy of the raw dataset.
 
-## Project Milestone 3 — Acquisition & Integration
+## P3: Acquisition and Integration
 
-For P3, I collected public S&P 500 company information from Wikipedia and SEC filing metadata through the SEC EDGAR API.
+For P3, I used Wikipedia and SEC EDGAR to collect company information and 10-K filings. I focused on five S&P 500 companies and estimated the length of their Item 1A risk-factor sections across different years.
 
-One issue I ran into was that the Wikipedia dataset had 503 securities but only 500 unique companies. Some companies had multiple stock classes with the same CIK, so I created a separate company-level dataset before merging.
+I included caching, rate limiting, and verification tests to check that the data was collected and organized correctly. I also explained some issues I ran into and how I handled them.
 
-I tested the integration using five companies. All five matched successfully, and the final dataset contained five rows with a 100% match rate.
-
-I also added verification assertions to check for duplicate identifiers, missing matches, invalid filing counts, and unexpected changes in row count. My code includes a deliberate HTTP failure test and a duplicate-key join test to demonstrate that errors are caught.
-
-The notebook uses caching, rate limiting, and public data sources. The current milestone focuses on company-level integration and does not yet include the complete risk-factor and stock-return analysis.
-
-### Running the Notebook
-
-Open `DSA405_002_FA26_P3_nmbrockm.ipynb` in Google Colab and run all cells in order. The notebook saves downloaded responses to `data/raw/` and the merged dataset to `data/processed/`.
+The historical stock-return portion is still incomplete because I wasn't able to get the price data downloaded. I kept that limitation in the notebook and explained what would be needed to finish it.
