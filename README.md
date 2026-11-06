@@ -32,3 +32,19 @@ Additional source documentation is located at:
 4. It audits the raw data, creates a data dictionary, performs cleaning, documents each cleaning decision, reconciles row and column counts, and validates the cleaned dataset.
 
 The raw data should not be modified directly. All cleaning is performed on a copy of the raw dataset.
+
+## Project Milestone 3 — Acquisition & Integration
+
+For P3, I collected public S&P 500 company information from Wikipedia and SEC filing metadata through the SEC EDGAR API.
+
+One issue I ran into was that the Wikipedia dataset had 503 securities but only 500 unique companies. Some companies had multiple stock classes with the same CIK, so I created a separate company-level dataset before merging.
+
+I tested the integration using five companies. All five matched successfully, and the final dataset contained five rows with a 100% match rate.
+
+I also added verification assertions to check for duplicate identifiers, missing matches, invalid filing counts, and unexpected changes in row count. My code includes a deliberate HTTP failure test and a duplicate-key join test to demonstrate that errors are caught.
+
+The notebook uses caching, rate limiting, and public data sources. The current milestone focuses on company-level integration and does not yet include the complete risk-factor and stock-return analysis.
+
+### Running the Notebook
+
+Open `DSA405_002_FA26_P3_nmbrockm.ipynb` in Google Colab and run all cells in order. The notebook saves downloaded responses to `data/raw/` and the merged dataset to `data/processed/`.
